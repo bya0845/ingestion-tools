@@ -6,9 +6,6 @@
   "engines": {
     "vscode": "^1.75.0"
   },
-  "activationEvents": [
-    "onCommand:opencode.settings"
-  ],
   "main": "./extension.js",
   "contributes": {
     "commands": [

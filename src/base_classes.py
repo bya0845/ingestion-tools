@@ -1,20 +1,33 @@
 from dataclasses import dataclass, field
 from datetime import datetime, timedelta
-from enum import StrEnum
-from logging import getLogger, INFO, DEBUG, basicConfig
+from logging import getLogger, DEBUG, basicConfig
 from pathlib import Path
+from typing import Literal
 from openpyxl import Workbook
 from openpyxl.styles import Font, Alignment, Border, Side
 from openpyxl.worksheet.worksheet import Worksheet
+from pydantic import BaseModel
+
+from src.constants import CONTACTS, REGION8_TEAMS, Employer, Personnel, Team
 
 basicConfig(level=DEBUG)
 logger = getLogger(__name__)
 
 
-class Employer(StrEnum):
-    WSP_USA = "WSP USA"
-    SOUTH_COL = "South Col"
-    LU_ENG = "Lu Eng"
+class InspectionEntry(BaseModel):
+    """A single bridge inspection entry for a weekly schedule row."""
+
+    team: str
+    scheduled_date: datetime
+    due_date: datetime
+    region: str
+    county: str
+    bin: str
+    feature_carried: str
+    feature_crossed: str
+    access: str
+    town: str
+    lane_closed: Literal["Y", "N"]
 
 
 @dataclass(frozen=True, eq=False)
@@ -84,26 +97,32 @@ class BaseCreator:
     """Base class for initializing weekly schedule spreadsheet with borders and and template info."""
 
     title: str | None = None
-    contact_info: list[dict[str, str]] = field(default_factory=list)
-    inspection_teams: list[dict[str, str]] = field(default_factory=list)
+    contact_info: tuple[Personnel, ...] = CONTACTS
+    inspection_teams: list[Team] = field(default_factory=list)
     workbook: Workbook = field(default_factory=Workbook)
     worksheet: Worksheet | None = field(init=False, default=None)
     week_start: datetime | None = None
     project_dir: Path = field(init=False)
     output_dir: Path = field(init=False)
-    default_filename: str = field(default="schedule.xlsx")
+    team_name: str = "Chen"
+    region: str = "8"
+    sheet_title: str = f"Region {region}"
+    default_filename: str = field(init=False)
     styles: ScheduleStyles = field(default_factory=ScheduleStyles)
     dimensions: ScheduleDimensions = field(default_factory=ScheduleDimensions)
 
     def __post_init__(self):
         if not self.title:
             self.title = "Bridge Inspection Weekly Schedule"
-        if not self.contact_info:
-            self.contact_info = self.initialize_contacts()
         if not self.inspection_teams:
             self.inspection_teams = self.initialize_inspection_teams()
         if not self.week_start:
             self.week_start = self.get_sunday()
+        week_str = self.week_start.strftime("%-m-%-d-%y")
+        self.default_filename = (
+            f"{self.team_name} Region {self.region} Bridge Inspection"
+            f" Weekly Schedule - Week of {week_str}.xlsx"
+        )
         self._init_directories()
         self.initialize_workbook()
 
@@ -126,7 +145,7 @@ class BaseCreator:
         ws = self.workbook.active
         if ws is None:
             raise RuntimeError("Failed to create worksheet")
-        ws.title = "Region 8"
+        ws.title = self.sheet_title
         self.worksheet = ws
         logger.debug("Worksheet created: %s", ws.title)
         self.initialize_dimensions()
@@ -137,97 +156,8 @@ class BaseCreator:
         self.initialize_table_headers()
         logger.info("Workbook initialization complete")
 
-    def initialize_contacts(self) -> list[dict[str, str]]:
-        return [
-            {
-                "name": "Salvatore Iodice",
-                "role": "Project Manager",
-                "office_phone": "",
-                "cell_phone": "(917) 763-2519",
-            },
-            {
-                "name": "Amy Hutcheson",
-                "role": "Asst. Project Manager",
-                "office_phone": "(914) 449-9038",
-                "cell_phone": "917-902-0186",
-            },
-            {
-                "name": "Karen Tomapat",
-                "role": "Scheduling/Office Assistant",
-                "office_phone": "(914) 449-9144",
-                "cell_phone": "845-283-0224",
-            },
-            {
-                "name": "Stephanie Santiago",
-                "role": "Office Assistant",
-                "office_phone": "",
-                "cell_phone": "917-509-0650",
-            },
-            {
-                "name": "Stacie Diamond",
-                "role": "Asst. Project Manager",
-                "office_phone": "(914) 449-9136",
-                "cell_phone": "845-642-7036",
-            },
-            {
-                "name": "Robert Seeley",
-                "role": "Quality Control",
-                "office_phone": "",
-                "cell_phone": "(914) 262-2766",
-            },
-        ]
-
-    def initialize_inspection_teams(self) -> list[dict[str, str]]:
-        return [
-            {
-                "employer": Employer.WSP_USA,
-                "team_leader": "Tom Barrell",
-                "atl": "Nick Diflorio",
-                "phone": "518-330-8841",
-            },
-            {
-                "employer": Employer.WSP_USA,
-                "team_leader": "Ben Kolesnik",
-                "atl": "Frank Fraser",
-                "phone": "845-596-7106",
-            },
-            {
-                "employer": Employer.WSP_USA,
-                "team_leader": "Oleg Shyputa",
-                "atl": "Dan Rivie",
-                "phone": "646-387-3354",
-            },
-            {
-                "employer": Employer.WSP_USA,
-                "team_leader": "Matt Bacon",
-                "atl": "Nick Mendola",
-                "phone": "774-239-9739",
-            },
-            {
-                "employer": Employer.WSP_USA,
-                "team_leader": "Kevin Milligan",
-                "atl": "Christian Flores",
-                "phone": "212-784-0037",
-            },
-            {
-                "employer": Employer.WSP_USA,
-                "team_leader": "Dan Hadden",
-                "atl": "Dionis Demukaj",
-                "phone": "845-661-6525",
-            },
-            {
-                "employer": Employer.SOUTH_COL,
-                "team_leader": "Shuangbi Chen",
-                "atl": "Bo Lun Yang",
-                "phone": "518-955-1990",
-            },
-            {
-                "employer": Employer.LU_ENG,
-                "team_leader": "Laura Fulford",
-                "atl": "Ruzen Shafir",
-                "phone": "518-577-7117",
-            },
-        ]
+    def initialize_inspection_teams(self) -> list[Team]:
+        return list(REGION8_TEAMS)
 
     def style_cell(
         self,
@@ -256,24 +186,24 @@ class BaseCreator:
             self.style_cell(
                 name_row,
                 1,
-                f"{contact['name']}, {contact['role']}",
+                f"{contact.name}, {contact.role}",
                 self.styles.normal_font,
             )
-            if contact.get("office_phone"):
+            if contact.office_phone:
                 self.style_cell(
                     phone_row,
                     1,
-                    f"Office PH {contact['office_phone']}",
+                    f"Office PH {contact.office_phone}",
                     self.styles.normal_font,
                 )
-            if contact.get("cell_phone"):
-                col = 3 if contact.get("office_phone") else 1
-                label = "Cell" if contact.get("office_phone") else "Cell PH"
+            if contact.cell_phone:
+                col = 3 if contact.office_phone else 1
+                label = "Cell" if contact.office_phone else "Cell PH"
                 alignment = Alignment(horizontal="center") if col == 3 else None
                 self.style_cell(
                     phone_row,
                     col,
-                    f"{label} {contact['cell_phone']}",
+                    f"{label} {contact.cell_phone}",
                     self.styles.normal_font,
                     alignment=alignment,
                 )
@@ -289,12 +219,11 @@ class BaseCreator:
         start_row = 3
         for i, team in enumerate(self.inspection_teams):
             row = start_row + i
-            team_info = f"{team['employer']}: {team['team_leader']}, Team Leader; {team['atl']}, ATL"
-            self.style_cell(row, 7, team_info, self.styles.normal_font)
+            self.style_cell(row, 7, str(team), self.styles.normal_font)
             self.style_cell(
                 row,
                 9,
-                team["phone"],
+                team.phone,
                 self.styles.normal_font,
                 alignment=Alignment(horizontal="center"),
             )
@@ -387,6 +316,7 @@ class BaseCreator:
         logger.debug("Setting headings section")
         if self.worksheet is None:
             raise RuntimeError("Worksheet not initialized")
+        assert self.week_start is not None
         ws = self.worksheet
         ws["A1"] = "WSP USA, INC."
         ws["A1"].font = self.styles.title_font
@@ -395,7 +325,7 @@ class BaseCreator:
         ws["A3"] = "Contract No. D037877"
         ws["A3"].font = self.styles.title_font
 
-        ws["H1"] = "Inspection Schedule for week of:"
+        ws["H1"] = "Inspection Schedule for Week of:"
         ws["H1"].font = self.styles.title_font
         ws.merge_cells("H1:I1")
         ws["H1"].alignment = Alignment(horizontal="right")
@@ -439,6 +369,47 @@ class BaseCreator:
             logger.error(f"Failed to save workbook: {e}")
             raise
         return output_path
+
+
+@dataclass
+class WeeklyScheduleCreator(BaseCreator):
+    """Creates a weekly inspection schedule pre-populated with bridge inspection data."""
+
+    inspection_entries: list[InspectionEntry] = field(default_factory=list)
+
+    def initialize_workbook(self) -> None:
+        """Initializes workbook template then populates bridge data rows."""
+        super().initialize_workbook()
+        self.add_inspection_entries()
+
+    def add_inspection_entries(self) -> None:
+        """Populates table rows with bridge inspection data starting at row 25."""
+        if self.worksheet is None:
+            raise RuntimeError("Worksheet not initialized")
+        ws = self.worksheet
+        font = self.styles.table_font
+        center = Alignment(horizontal="center", vertical="center")
+        for i, entry in enumerate(self.inspection_entries):
+            row = 25 + i
+            values = [
+                entry.team,
+                entry.scheduled_date,
+                entry.due_date,
+                entry.region,
+                entry.county,
+                entry.bin,
+                entry.feature_carried,
+                entry.feature_crossed,
+                entry.access,
+                entry.town,
+                entry.lane_closed,
+            ]
+            for col, value in enumerate(values, 1):
+                cell = ws.cell(row=row, column=col, value=value)
+                cell.font = font
+                cell.alignment = center
+                cell.border = self.styles.thin_border
+        logger.debug("Populated %d data rows", len(self.inspection_entries))
 
 
 def create_sample_workbook() -> Path:

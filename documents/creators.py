@@ -1,33 +1,19 @@
+from collections import defaultdict
 from dataclasses import dataclass, field
 from datetime import datetime, timedelta
+from io import BytesIO
 from logging import getLogger, DEBUG, basicConfig
 from pathlib import Path
-from typing import Literal
+
 from openpyxl import Workbook
 from openpyxl.styles import Font, Alignment, Border, Side
 from openpyxl.worksheet.worksheet import Worksheet
-from pydantic import BaseModel
 
-from src.constants import CONTACTS, REGION8_TEAMS, Employer, Personnel, Team
+from documents.schemas import InspectionEntry
+from teams.models import Personnel, Team
 
 basicConfig(level=DEBUG)
 logger = getLogger(__name__)
-
-
-class InspectionEntry(BaseModel):
-    """A single bridge inspection entry for a weekly schedule row."""
-
-    team: str
-    scheduled_date: datetime
-    due_date: datetime
-    region: str
-    county: str
-    bin: str
-    feature_carried: str
-    feature_crossed: str
-    access: str
-    town: str
-    lane_closed: Literal["Y", "N"]
 
 
 @dataclass(frozen=True, eq=False)
@@ -94,10 +80,12 @@ class ScheduleDimensions:
 
 @dataclass
 class BaseCreator:
-    """Base class for initializing weekly schedule spreadsheet with borders and and template info."""
+    """Base class for initializing weekly schedule spreadsheet with borders and template info."""
 
     title: str | None = None
-    contact_info: tuple[Personnel, ...] = CONTACTS
+    contact_info: tuple[Personnel, ...] = field(
+        default_factory=lambda: tuple(Personnel.objects.all())
+    )
     inspection_teams: list[Team] = field(default_factory=list)
     workbook: Workbook = field(default_factory=Workbook)
     worksheet: Worksheet | None = field(init=False, default=None)
@@ -105,6 +93,7 @@ class BaseCreator:
     project_dir: Path = field(init=False)
     output_dir: Path = field(init=False)
     team_name: str = "Chen"
+    output_dir_override: Path | None = None
     region: str = "8"
     sheet_title: str = f"Region {region}"
     default_filename: str = field(init=False)
@@ -132,15 +121,17 @@ class BaseCreator:
         except (NameError, OSError) as e:
             logger.error(f"Failed to resolve project directory: {e}")
             self.project_dir = Path.cwd()
-        self.output_dir = self.project_dir / "output"
+        self.output_dir = self.output_dir_override if self.output_dir_override else self.project_dir / "output"
 
     @staticmethod
     def get_sunday(date: datetime | None = None) -> datetime:
+        """Returns the Sunday that starts the week containing date."""
         if date is None:
             date = datetime.now()
         return date - timedelta(days=(date.weekday() + 1) % 7)
 
     def initialize_workbook(self) -> None:
+        """Initializes the workbook worksheet, dimensions, and all header sections."""
         logger.info("Initializing workbook")
         ws = self.workbook.active
         if ws is None:
@@ -157,7 +148,8 @@ class BaseCreator:
         logger.info("Workbook initialization complete")
 
     def initialize_inspection_teams(self) -> list[Team]:
-        return list(REGION8_TEAMS)
+        """Loads all inspection teams from the database."""
+        return list(Team.objects.all())
 
     def style_cell(
         self,
@@ -167,6 +159,7 @@ class BaseCreator:
         font: Font,
         alignment: Alignment | None = None,
     ) -> None:
+        """Writes a value to a cell and applies font and optional alignment."""
         if self.worksheet is None:
             raise RuntimeError("Worksheet not initialized")
         cell = self.worksheet.cell(row=row, column=col, value=value)
@@ -175,6 +168,7 @@ class BaseCreator:
             cell.alignment = alignment
 
     def initialize_contacts_section(self) -> None:
+        """Populates the contacts section with personnel names and phone numbers."""
         logger.debug("Setting contacts section")
         if self.worksheet is None:
             raise RuntimeError("Worksheet not initialized")
@@ -210,6 +204,7 @@ class BaseCreator:
         logger.debug("Added %d contacts", len(self.contact_info))
 
     def initialize_teams_section(self) -> None:
+        """Populates the inspection teams section with team names and phone numbers."""
         logger.debug("Setting inspection teams section")
         if self.worksheet is None:
             raise RuntimeError("Worksheet not initialized")
@@ -233,6 +228,7 @@ class BaseCreator:
         logger.debug("Added %d inspection teams", len(self.inspection_teams))
 
     def initialize_access_legend(self) -> None:
+        """Writes the access method key to the worksheet."""
         logger.debug("Setting access legend")
         if self.worksheet is None:
             raise RuntimeError("Worksheet not initialized")
@@ -252,6 +248,7 @@ class BaseCreator:
         ws["H22"].font = self.styles.normal_font
 
     def initialize_table_headers(self) -> None:
+        """Writes the data table header row and applies borders to the data rows below it."""
         logger.debug("Setting table headers")
         if self.worksheet is None:
             raise RuntimeError("Worksheet not initialized")
@@ -283,6 +280,7 @@ class BaseCreator:
         logger.debug("Applied borders to rows %d-%d", header_row + 1, header_row + 10)
 
     def initialize_dimensions(self) -> None:
+        """Applies column widths, row heights, and border grid to the worksheet."""
         logger.debug("Setting column widths and row heights")
         if self.worksheet is None:
             raise RuntimeError("Worksheet not initialized")
@@ -313,6 +311,7 @@ class BaseCreator:
         )
 
     def initialize_headings(self) -> None:
+        """Writes the company, contract, and week-of headings to the worksheet."""
         logger.debug("Setting headings section")
         if self.worksheet is None:
             raise RuntimeError("Worksheet not initialized")
@@ -347,6 +346,7 @@ class BaseCreator:
         ws.merge_cells("G3:H3")
 
     def save(self, filename: str | None = None) -> Path:
+        """Saves the workbook to the output directory and returns the file path."""
         if filename is None:
             filename = self.default_filename
         output_path = self.output_dir / filename
@@ -369,6 +369,12 @@ class BaseCreator:
             logger.error(f"Failed to save workbook: {e}")
             raise
         return output_path
+
+    def to_bytes(self) -> bytes:
+        """Returns the workbook content as bytes without writing to disk."""
+        buf = BytesIO()
+        self.workbook.save(buf)
+        return buf.getvalue()
 
 
 @dataclass
@@ -409,14 +415,81 @@ class WeeklyScheduleCreator(BaseCreator):
                 cell.font = font
                 cell.alignment = center
                 cell.border = self.styles.thin_border
+                if isinstance(value, datetime):
+                    cell.number_format = "mm/dd/yy"
         logger.debug("Populated %d data rows", len(self.inspection_entries))
 
 
+def create_schedules_from_entries(
+    entries: list[dict], team_name: str, output_dir: Path | None = None
+) -> list[Path]:
+    """Creates one weekly schedule file per week from parsed inspection entry dicts.
+
+    All entries are attributed to team_name regardless of the source data's team column.
+    Skips entries that fail InspectionEntry validation. Returns list of saved file paths.
+    If output_dir is provided it overrides the default output/ directory.
+    """
+    valid: list[InspectionEntry] = []
+    for e in entries:
+        try:
+            valid.append(InspectionEntry(**{**e, "team": team_name}))
+        except Exception:
+            logger.warning("Skipping invalid entry: %s", e.get("bin", "?"))
+
+    weeks: dict[datetime, list[InspectionEntry]] = defaultdict(list)
+    for entry in valid:
+        week_start = BaseCreator.get_sunday(entry.scheduled_date)
+        weeks[week_start].append(entry)
+
+    paths = []
+    for week_start, group in weeks.items():
+        creator = WeeklyScheduleCreator(
+            inspection_entries=group,
+            week_start=week_start,
+            team_name=team_name,
+            output_dir_override=output_dir,
+        )
+        paths.append(creator.save())
+        logger.info("Created schedule for team=%s week=%s: %d entries", team_name, week_start.date(), len(group))
+    return paths
+
+
+def create_schedules_as_bytes(
+    entries: list[dict], team_name: str, output_dir: Path | None = None
+) -> list[tuple[str, bytes]]:
+    """Creates weekly schedule workbooks in memory, returns (filename, bytes) pairs.
+
+    If output_dir is provided, also saves each file to disk at that path.
+    Skips entries that fail InspectionEntry validation.
+    """
+    valid: list[InspectionEntry] = []
+    for e in entries:
+        try:
+            valid.append(InspectionEntry(**{**e, "team": team_name}))
+        except Exception:
+            logger.warning("Skipping invalid entry: %s", e.get("bin", "?"))
+
+    weeks: dict[datetime, list[InspectionEntry]] = defaultdict(list)
+    for entry in valid:
+        week_start = BaseCreator.get_sunday(entry.scheduled_date)
+        weeks[week_start].append(entry)
+
+    results = []
+    for week_start, group in weeks.items():
+        creator = WeeklyScheduleCreator(
+            inspection_entries=group,
+            week_start=week_start,
+            team_name=team_name,
+            output_dir_override=output_dir,
+        )
+        if output_dir:
+            creator.save()
+        results.append((creator.default_filename, creator.to_bytes()))
+        logger.info("Created schedule for team=%s week=%s: %d entries", team_name, week_start.date(), len(group))
+    return results
+
+
 def create_sample_workbook() -> Path:
+    """Creates an empty sample schedule workbook using DB-backed contact and team data."""
     creator = BaseCreator()
     return creator.save("sample_schedule.xlsx")
-
-
-if __name__ == "__main__":
-    path = create_sample_workbook()
-    print(f"Sample workbook created: {path}")

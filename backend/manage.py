@@ -3,6 +3,9 @@
 
 import os
 import sys
+from src.logging_config import configure_logger
+
+configure_logger(log_level="DEBUG", log_file="logs/debug.log")
 
 
 def main():

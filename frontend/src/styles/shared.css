@@ -76,6 +76,12 @@ textarea {
   color: var(--wsp-red);
 }
 
+.success-msg {
+  margin-top: 1rem;
+  font-size: 0.875rem;
+  color: #22863a;
+}
+
 .count-msg {
   margin-top: 1rem;
   font-size: 0.875rem;

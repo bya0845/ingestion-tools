@@ -1,22 +1,33 @@
 import io
 import json
 import zipfile
+import logging
 
 from rest_framework import status
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
-
+from pathlib import Path
 from documents.creators import create_schedules_as_bytes
 from src.input_parser import parse_entries_from_table, parse_tsv
+from django.http import HttpResponse
+
+logger = logging.getLogger(__name__)
 
 
 @api_view(["POST"])
 def preview_schedule(request):
     """Parses TSV data and returns preview entries for the frontend table."""
+    logger.info("Preview schedule requested")
     raw_tsv = request.data.get("raw_tsv", "")
     if not raw_tsv.strip():
+        logger.debug("Empty TSV data provided")
         return Response({"entries": [], "count": 0})
-    entries = parse_tsv(raw_tsv)
+    logger.debug(f"Parsing TSV, length: {len(raw_tsv)}")
+    try:
+        entries = parse_tsv(raw_tsv)
+    except ValueError as error:
+        logger.error(f"TSV parse error: {error}")
+        return Response({"error": str(error)}, status=status.HTTP_400_BAD_REQUEST)
     serialized = [
         {
             "bin": e["bin"],
@@ -31,6 +42,7 @@ def preview_schedule(request):
         }
         for e in entries
     ]
+    logger.debug(f"Serialized {len(serialized)} entries: {serialized}")
     return Response({"entries": serialized, "count": len(serialized)})
 
 
@@ -64,8 +76,6 @@ def generate_schedule(request):
             {"error": "No valid entries found"}, status=status.HTTP_400_BAD_REQUEST
         )
 
-    from pathlib import Path
-
     output_path = Path(output_dir) if output_dir else None
     results = create_schedules_as_bytes(entries, team_name, output_dir=output_path)
 
@@ -77,8 +87,6 @@ def generate_schedule(request):
 
     if len(results) == 1:
         filename, content = results[0]
-        from django.http import HttpResponse
-
         response = HttpResponse(
             content,
             content_type="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
@@ -92,8 +100,6 @@ def generate_schedule(request):
         for filename, content in results:
             zf.writestr(filename, content)
     buf.seek(0)
-    from django.http import HttpResponse
-
     response = HttpResponse(buf.getvalue(), content_type="application/zip")
     response["Content-Disposition"] = 'attachment; filename="schedules.zip"'
     response["Access-Control-Expose-Headers"] = "Content-Disposition"

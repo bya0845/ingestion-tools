@@ -1,12 +1,12 @@
-import { NavLink } from 'react-router-dom';
-import './Layout.css';
+import { NavLink } from "react-router-dom";
+import "./Layout.css";
 
 const menuItems = [
-  { to: '/', label: 'Home' },
-  { to: '/schedule', label: 'Generate Schedule' },
-  { to: '/daily-logs', label: 'Generate Daily Logs' },
-  { to: '/bat-survey', label: 'Generate Bat Survey Forms' },
-  { to: '/801-sketch', label: 'Generate 801 Sketch' },
+  { to: "/", label: "Home" },
+  { to: "/schedule", label: "Schedule" },
+  { to: "/daily-logs", label: "Daily Logs" },
+  { to: "/bat-survey", label: "Bat Survey Forms" },
+  { to: "/801-sketch", label: "ADE-801 (Stream Hydraulics)" },
 ];
 
 export default function Layout({ children }) {
@@ -15,23 +15,25 @@ export default function Layout({ children }) {
       <aside className="sidebar">
         <div className="sidebar-header">
           <div className="logo-mark" />
-          <span className="logo-text"><span className="accent">WSP USA</span></span>
+          <span className="logo-text">
+            <span className="accent">WSP USA</span>
+          </span>
         </div>
         <nav className="sidebar-nav">
           {menuItems.map((item) => (
             <NavLink
               key={item.to}
               to={item.to}
-              className={({ isActive }) => `nav-item ${isActive ? 'active' : ''}`}
+              className={({ isActive }) =>
+                `nav-item ${isActive ? "active" : ""}`
+              }
             >
               {item.label}
             </NavLink>
           ))}
         </nav>
       </aside>
-      <main className="main-content">
-        {children}
-      </main>
+      <main className="main-content">{children}</main>
     </div>
   );
 }

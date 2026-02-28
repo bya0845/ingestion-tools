@@ -1,5 +1,5 @@
 import { useState, useCallback, useContext } from "react";
-import { previewSchedule, generateSchedule } from "../api/client";
+import { previewSchedule, generateSchedule, generateDailyLogs } from "../api/client";
 import Layout from "../components/Layout";
 import { TeamsContext } from "../context/TeamContext";
 import { useFileGeneration } from "../hooks/useFileGeneration";
@@ -74,6 +74,21 @@ export default function SchedulePage() {
   const handleGenerate = createGenerateHandler(
     "Schedules",
     (trimmedDir) => generateSchedule(selectedTeam, entries, trimmedDir, !!trimmedDir),
+    () => {
+      if (!selectedTeam || entries.length === 0) {
+        const errorMsg = !selectedTeam
+          ? "Please select a team"
+          : "Please preview data to add entries";
+        return { valid: false, error: errorMsg };
+      }
+      return { valid: true };
+    },
+  );
+
+  const handleGenerateDailyLogs = createGenerateHandler(
+    "Daily Logs",
+    (trimmedDir) =>
+      generateDailyLogs(selectedTeam, entries, trimmedDir, !!trimmedDir),
     () => {
       if (!selectedTeam || entries.length === 0) {
         const errorMsg = !selectedTeam
@@ -201,6 +216,14 @@ export default function SchedulePage() {
           disabled={loading || entries.length === 0 || !selectedTeam}
         >
           Generate Schedules
+        </button>
+        <button
+          type="button"
+          className="btn btn-primary"
+          onClick={handleGenerateDailyLogs}
+          disabled={loading || entries.length === 0 || !selectedTeam}
+        >
+          Generate Daily Logs
         </button>
       </form>
 

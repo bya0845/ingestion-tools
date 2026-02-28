@@ -36,3 +36,24 @@ export async function generateSchedule(teamName, entries, outputDir = '', saveTo
   const blob = await response.blob();
   return { blob, filename, contentType };
 }
+
+export async function generateDailyLogs(teamName, entries, outputDir = '', saveToSystem = false) {
+  const response = await fetch(`${API_BASE_URL}/inspections/daily-logs/`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      team_name: teamName,
+      entries_json: JSON.stringify(entries),
+      output_dir: outputDir,
+      save_to_system: saveToSystem,
+    }),
+  });
+  if (!response.ok) {
+    const error = await response.json().catch(() => ({ error: 'Failed to generate daily logs' }));
+    throw new Error(error.error || 'Failed to generate daily logs');
+  }
+  const contentType = response.headers.get('Content-Type') || '';
+  const filename = response.headers.get('Content-Disposition')?.match(/filename="(.+)"/)?.[1] || 'daily_logs.xlsm';
+  const blob = await response.blob();
+  return { blob, filename, contentType };
+}

@@ -1,3 +1,4 @@
+from collections import defaultdict
 from dataclasses import dataclass, field
 from datetime import datetime, timedelta
 from logging import getLogger
@@ -5,6 +6,7 @@ from pathlib import Path
 
 from openpyxl import load_workbook
 
+from documents.schemas import InspectionEntry
 from documents.templates.base_doc import BaseCreator
 from src.utils import get_sunday
 
@@ -156,3 +158,105 @@ class DailyLogCreator(BaseCreator):
                     logger.debug(f"Set {field} '{value}' at row {row}, col {col_num}")
 
         logger.debug(f"Populated {min(len(entries), max_rows)} entry rows")
+
+    def populate_weekly_log(self, schedule_data: list[dict]) -> None:
+        """Populates daily log sheets with inspection entries grouped by scheduled date.
+
+        Args:
+            schedule_data: List of inspection entry dicts from weekly_schedule.py
+                containing fields like region, county, bin, feature_carried,
+                feature_crossed, scheduled_date, etc.
+        """
+        valid_entries: list[InspectionEntry] = []
+        for entry in schedule_data:
+            try:
+                valid_entries.append(InspectionEntry(**entry))
+            except Exception as e:
+                logger.warning(f"Skipping invalid entry {entry.get('bin', '?')}: {e}")
+
+        # Group entries by scheduled date
+        entries_by_date: dict[datetime, list[dict]] = defaultdict(list)
+        for entry in valid_entries:
+            date_key = entry.scheduled_date.date()
+            entries_by_date[date_key].append(entry.model_dump())
+
+        # Map dates to sheet names
+        day_names = ["SUNDAY", "MONDAY", "TUESDAY", "WEDNESDAY", "THURSDAY", "FRIDAY", "SATURDAY"]
+
+        for date_key, entries in sorted(entries_by_date.items()):
+            day_of_week = date_key.weekday()
+            sheet_name = day_names[(day_of_week + 1) % 7]  # Convert Python weekday to sheet day
+
+            if sheet_name in self.workbook.sheetnames:
+                day_values = {
+                    "header": {"date": datetime.combine(date_key, datetime.min.time())},
+                    "entries": entries,
+                }
+                self.populate_sheet_values(sheet_name, day_values)
+                logger.info(f"Populated {sheet_name} with {len(entries)} entries for {date_key}")
+            else:
+                logger.warning(f"Sheet {sheet_name} not found for date {date_key}")
+
+
+def create_daily_logs_from_schedule(
+    schedule_data: list[dict], team_name: str, output_dir: Path | None = None
+) -> list[Path]:
+    """Creates weekly daily logs with inspection entries prefilled from schedule data.
+
+    Args:
+        schedule_data: List of inspection entry dicts from weekly_schedule.py.
+        team_name: Team name to populate in the daily logs.
+        output_dir: Optional output directory; uses default if None.
+
+    Returns:
+        List of saved file paths for each week's daily log.
+    """
+    weeks: dict[datetime, list[dict]] = defaultdict(list)
+    for entry in schedule_data:
+        try:
+            inspection_entry = InspectionEntry(**entry)
+            week_start = get_sunday(inspection_entry.scheduled_date)
+            weeks[week_start].append(entry)
+        except Exception as e:
+            logger.warning(f"Skipping invalid entry {entry.get('bin', '?')}: {e}")
+
+    paths = []
+    for week_start, entries in sorted(weeks.items()):
+        creator = DailyLogCreator(team=team_name, output_dir_override=output_dir)
+        creator.populate_weekly_log(entries)
+        paths.append(creator.save())
+        logger.info(
+            f"Created daily logs for team={team_name} week={week_start.date()} "
+            f"with {len(entries)} total entries"
+        )
+    return paths
+
+
+def create_daily_logs_as_bytes(
+    entries: list[dict], team_name: str
+) -> list[tuple[str, bytes]]:
+    """Creates weekly daily log workbooks in memory, returns (filename, bytes) pairs.
+
+    Skips entries that fail InspectionEntry validation.
+    """
+    weeks: dict[datetime, list[dict]] = defaultdict(list)
+    for entry in entries:
+        try:
+            inspection_entry = InspectionEntry(**entry)
+            week_start = get_sunday(inspection_entry.scheduled_date)
+            weeks[week_start].append(entry)
+        except Exception:
+            logger.warning(f"Skipping invalid entry: {entry.get('bin', '?')}")
+
+    results = []
+    for week_start, week_entries in sorted(weeks.items()):
+        creator = DailyLogCreator(team=team_name)
+        creator.populate_weekly_log(week_entries)
+        week_str = week_start.strftime("%-m-%-d-%y")
+        filename = f"{team_name} Region 8 Daily Logs - Week of {week_str}.xlsm"
+        results.append((filename, creator.to_bytes()))
+        logger.info(
+            f"Created daily logs for team={team_name} week={week_start.date()} "
+            f"with {len(week_entries)} total entries"
+        )
+    return results

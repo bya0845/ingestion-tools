@@ -1,1 +1,267 @@
-INFO 2026-02-25 18:59:19,723 autoreload 605630 139656360853632 Watching for file changes with StatReloader
+INFO 2026-02-28 18:46:26,404 autoreload 678176 134557961863296 Watching for file changes with StatReloader
+INFO 2026-02-28 18:50:16,425 api 678176 134557609215680 Preview schedule requested
+ERROR 2026-02-28 18:50:16,426 input_parser 678176 134557609215680 Each row must have a BIN and scheduled date. Skipping row with empty BIN or scheduled date: 'CAPE AVENUE	BEER KILL	Steel MG	12/16/24	1216	8B240TW052		4	1	4	13			EL, W	11/12/25'
+ERROR 2026-02-28 18:50:16,426 input_parser 678176 134557609215680 Each row must have a BIN and scheduled date. Skipping row with empty BIN or scheduled date: '														'
+ERROR 2026-02-28 18:50:16,426 input_parser 678176 134557609215680 Each row must have a BIN and scheduled date. Skipping row with empty BIN or scheduled date: 'LASHER ROAD	BIRCH CREEK	Stringer/Multi-Beam or Girder	10/11/23	1011			6	1	3	8			W, EL	11/17/25'
+ERROR 2026-02-28 18:50:16,426 input_parser 678176 134557609215680 Each row must have a BIN and scheduled date. Skipping row with empty BIN or scheduled date: '214 214 86011018	STONY CLOVE CREEK	Box Beam or Box Girders - Multiple	10/19/23	1019			6	1	3	8			W, EL	11/17/25'
+ERROR 2026-02-28 18:50:16,426 input_parser 678176 134557609215680 Each row must have a BIN and scheduled date. Skipping row with empty BIN or scheduled date: '209 209 86031052	FANTINE KILL	Stringer/Multi-Beam or Girder	11/29/23	1129			7	1	2	6			W, EL	11/18/25'
+ERROR 2026-02-28 18:50:16,426 input_parser 678176 134557609215680 Each row must have a BIN and scheduled date. Skipping row with empty BIN or scheduled date: '52 52 86021106	NORTH GULLY CREEK	Stringer/Multi-Beam or Girder	11/29/23	1129			5	1	3	9			W, EL	11/18/25'
+ERROR 2026-02-28 18:50:16,426 input_parser 678176 134557609215680 Each row must have a BIN and scheduled date. Skipping row with empty BIN or scheduled date: '														'
+ERROR 2026-02-28 18:50:16,426 input_parser 678176 134557609215680 Each row must have a BIN and scheduled date. Skipping row with empty BIN or scheduled date: '														11/17, 18'
+ERROR 2026-02-28 18:50:16,426 input_parser 678176 134557609215680 Each row must have a BIN and scheduled date. Skipping row with empty BIN or scheduled date: 'MAIN & RIVER STS	RELIEF	Steel MG	11/12/24	1112	8B24CVW014, 020 & 021 & 8B25CVW001		4	16	26	75			BT, EL, SL, W	11/20/25'
+ERROR 2026-02-28 18:50:16,426 input_parser 678176 134557609215680 Each row must have a BIN and scheduled date. Skipping row with empty BIN or scheduled date: '														'
+ERROR 2026-02-28 18:50:16,426 input_parser 678176 134557609215680 Each row must have a BIN and scheduled date. Skipping row with empty BIN or scheduled date: 'BLACK CREEK RD	SWARTE KILL	Alum Culv	11/8/23	1108			7	1	2.3	6			W	11/24/25'
+ERROR 2026-02-28 18:50:16,426 input_parser 678176 134557609215680 Each row must have a BIN and scheduled date. Skipping row with empty BIN or scheduled date: 'NORTH CHODIKEE LAKE ROAD	BLACK CREEK	Steel MG	11/29/23	1129			7	1	3	6			SL	11/24/25'
+ERROR 2026-02-28 18:50:16,426 input_parser 678176 134557609215680 Each row must have a BIN and scheduled date. Skipping row with empty BIN or scheduled date: 'MAIN & RIVER STS	RELIEF	Steel MG	11/12/24	1112	8B24CVW014, 020 & 021 & 8B25CVW001		4	16	26	75			EL, SL, W	11/25/25'
+INFO 2026-02-28 18:50:22,763 api 678176 134557609215680 Preview schedule requested
+ERROR 2026-02-28 18:50:22,763 input_parser 678176 134557609215680 Each row must have a BIN and scheduled date. Skipping row with empty BIN or scheduled date: 'CAPE AVENUE	BEER KILL	Steel MG	12/16/24	1216	8B240TW052		4	1	4	13			EL, W	11/12/25'
+ERROR 2026-02-28 18:50:22,763 input_parser 678176 134557609215680 Each row must have a BIN and scheduled date. Skipping row with empty BIN or scheduled date: '														'
+ERROR 2026-02-28 18:50:22,763 input_parser 678176 134557609215680 Each row must have a BIN and scheduled date. Skipping row with empty BIN or scheduled date: 'LASHER ROAD	BIRCH CREEK	Stringer/Multi-Beam or Girder	10/11/23	1011			6	1	3	8			W, EL	11/17/25'
+ERROR 2026-02-28 18:50:22,763 input_parser 678176 134557609215680 Each row must have a BIN and scheduled date. Skipping row with empty BIN or scheduled date: '214 214 86011018	STONY CLOVE CREEK	Box Beam or Box Girders - Multiple	10/19/23	1019			6	1	3	8			W, EL	11/17/25'
+ERROR 2026-02-28 18:50:22,763 input_parser 678176 134557609215680 Each row must have a BIN and scheduled date. Skipping row with empty BIN or scheduled date: '209 209 86031052	FANTINE KILL	Stringer/Multi-Beam or Girder	11/29/23	1129			7	1	2	6			W, EL	11/18/25'
+ERROR 2026-02-28 18:50:22,763 input_parser 678176 134557609215680 Each row must have a BIN and scheduled date. Skipping row with empty BIN or scheduled date: '52 52 86021106	NORTH GULLY CREEK	Stringer/Multi-Beam or Girder	11/29/23	1129			5	1	3	9			W, EL	11/18/25'
+ERROR 2026-02-28 18:50:22,763 input_parser 678176 134557609215680 Each row must have a BIN and scheduled date. Skipping row with empty BIN or scheduled date: '														'
+ERROR 2026-02-28 18:50:22,763 input_parser 678176 134557609215680 Each row must have a BIN and scheduled date. Skipping row with empty BIN or scheduled date: '														11/17, 18'
+ERROR 2026-02-28 18:50:22,763 input_parser 678176 134557609215680 Each row must have a BIN and scheduled date. Skipping row with empty BIN or scheduled date: 'MAIN & RIVER STS	RELIEF	Steel MG	11/12/24	1112	8B24CVW014, 020 & 021 & 8B25CVW001		4	16	26	75			BT, EL, SL, W	11/20/25'
+ERROR 2026-02-28 18:50:22,763 input_parser 678176 134557609215680 Each row must have a BIN and scheduled date. Skipping row with empty BIN or scheduled date: '														'
+ERROR 2026-02-28 18:50:22,763 input_parser 678176 134557609215680 Each row must have a BIN and scheduled date. Skipping row with empty BIN or scheduled date: 'BLACK CREEK RD	SWARTE KILL	Alum Culv	11/8/23	1108			7	1	2.3	6			W	11/24/25'
+ERROR 2026-02-28 18:50:22,764 input_parser 678176 134557609215680 Each row must have a BIN and scheduled date. Skipping row with empty BIN or scheduled date: 'NORTH CHODIKEE LAKE ROAD	BLACK CREEK	Steel MG	11/29/23	1129			7	1	3	6			SL	11/24/25'
+ERROR 2026-02-28 18:50:22,764 input_parser 678176 134557609215680 Each row must have a BIN and scheduled date. Skipping row with empty BIN or scheduled date: 'MAIN & RIVER STS	RELIEF	Steel MG	11/12/24	1112	8B24CVW014, 020 & 021 & 8B25CVW001		4	16	26	75			EL, SL, W	11/25/25'
+INFO 2026-02-28 18:50:34,135 api 678176 134557609215680 Preview schedule requested
+ERROR 2026-02-28 18:50:34,136 input_parser 678176 134557609215680 Each row must have a BIN and scheduled date. Skipping row with empty BIN or scheduled date: 'CAPE AVENUE	BEER KILL	Steel MG	12/16/24	1216	8B240TW052		4	1	4	13			EL, W	11/12/25'
+ERROR 2026-02-28 18:50:34,136 input_parser 678176 134557609215680 Each row must have a BIN and scheduled date. Skipping row with empty BIN or scheduled date: '														'
+ERROR 2026-02-28 18:50:34,136 input_parser 678176 134557609215680 Each row must have a BIN and scheduled date. Skipping row with empty BIN or scheduled date: 'LASHER ROAD	BIRCH CREEK	Stringer/Multi-Beam or Girder	10/11/23	1011			6	1	3	8			W, EL	11/17/25'
+ERROR 2026-02-28 18:50:34,136 input_parser 678176 134557609215680 Each row must have a BIN and scheduled date. Skipping row with empty BIN or scheduled date: '214 214 86011018	STONY CLOVE CREEK	Box Beam or Box Girders - Multiple	10/19/23	1019			6	1	3	8			W, EL	11/17/25'
+ERROR 2026-02-28 18:50:34,136 input_parser 678176 134557609215680 Each row must have a BIN and scheduled date. Skipping row with empty BIN or scheduled date: '209 209 86031052	FANTINE KILL	Stringer/Multi-Beam or Girder	11/29/23	1129			7	1	2	6			W, EL	11/18/25'
+ERROR 2026-02-28 18:50:34,136 input_parser 678176 134557609215680 Each row must have a BIN and scheduled date. Skipping row with empty BIN or scheduled date: '52 52 86021106	NORTH GULLY CREEK	Stringer/Multi-Beam or Girder	11/29/23	1129			5	1	3	9			W, EL	11/18/25'
+ERROR 2026-02-28 18:50:34,136 input_parser 678176 134557609215680 Each row must have a BIN and scheduled date. Skipping row with empty BIN or scheduled date: '														'
+ERROR 2026-02-28 18:50:34,136 input_parser 678176 134557609215680 Each row must have a BIN and scheduled date. Skipping row with empty BIN or scheduled date: '														11/17, 18'
+ERROR 2026-02-28 18:50:34,136 input_parser 678176 134557609215680 Each row must have a BIN and scheduled date. Skipping row with empty BIN or scheduled date: 'MAIN & RIVER STS	RELIEF	Steel MG	11/12/24	1112	8B24CVW014, 020 & 021 & 8B25CVW001		4	16	26	75			BT, EL, SL, W	11/20/25'
+ERROR 2026-02-28 18:50:34,136 input_parser 678176 134557609215680 Each row must have a BIN and scheduled date. Skipping row with empty BIN or scheduled date: '														'
+ERROR 2026-02-28 18:50:34,136 input_parser 678176 134557609215680 Each row must have a BIN and scheduled date. Skipping row with empty BIN or scheduled date: 'BLACK CREEK RD	SWARTE KILL	Alum Culv	11/8/23	1108			7	1	2.3	6			W	11/24/25'
+ERROR 2026-02-28 18:50:34,136 input_parser 678176 134557609215680 Each row must have a BIN and scheduled date. Skipping row with empty BIN or scheduled date: 'NORTH CHODIKEE LAKE ROAD	BLACK CREEK	Steel MG	11/29/23	1129			7	1	3	6			SL	11/24/25'
+ERROR 2026-02-28 18:50:34,136 input_parser 678176 134557609215680 Each row must have a BIN and scheduled date. Skipping row with empty BIN or scheduled date: 'MAIN & RIVER STS	RELIEF	Steel MG	11/12/24	1112	8B24CVW014, 020 & 021 & 8B25CVW001		4	16	26	75			EL, SL, W	11/25/25'
+INFO 2026-02-28 18:50:49,422 api 678176 134557609215680 Preview schedule requested
+ERROR 2026-02-28 18:50:49,434 input_parser 678176 134557609215680 Each row must have a BIN and scheduled date. Skipping row with empty BIN or scheduled date: '																			'
+ERROR 2026-02-28 18:50:49,436 input_parser 678176 134557609215680 Each row must have a BIN and scheduled date. Skipping row with empty BIN or scheduled date: '																			'
+ERROR 2026-02-28 18:50:49,436 api 678176 134557609215680 TSV parse error: Invalid TSV format: expected county ID in first column, got ''
+WARNING 2026-02-28 18:50:49,436 log 678176 134557609215680 Bad Request: /api/inspections/preview/
+INFO 2026-02-28 18:50:50,704 api 678176 134557609215680 Preview schedule requested
+ERROR 2026-02-28 18:50:50,714 input_parser 678176 134557609215680 Each row must have a BIN and scheduled date. Skipping row with empty BIN or scheduled date: '																			'
+ERROR 2026-02-28 18:50:50,716 input_parser 678176 134557609215680 Each row must have a BIN and scheduled date. Skipping row with empty BIN or scheduled date: '																			'
+ERROR 2026-02-28 18:50:50,716 api 678176 134557609215680 TSV parse error: Invalid TSV format: expected county ID in first column, got ''
+WARNING 2026-02-28 18:50:50,717 log 678176 134557609215680 Bad Request: /api/inspections/preview/
+INFO 2026-02-28 18:51:11,503 api 678176 134557609215680 Preview schedule requested
+ERROR 2026-02-28 18:51:11,514 input_parser 678176 134557609215680 Each row must have a BIN and scheduled date. Skipping row with empty BIN or scheduled date: '																			'
+ERROR 2026-02-28 18:51:11,514 api 678176 134557609215680 TSV parse error: Invalid TSV format: expected county ID in first column, got ''
+WARNING 2026-02-28 18:51:11,514 log 678176 134557609215680 Bad Request: /api/inspections/preview/
+INFO 2026-02-28 18:52:00,034 api 678176 134557609215680 Preview schedule requested
+INFO 2026-02-28 18:52:02,624 daily_logs 678176 134557609215680 Loading template from /home/p1/backend/documents/data/R8_daily_log_template.xlsx
+DEBUG 2026-02-28 18:52:02,930 daily_logs 678176 134557609215680 Set team 'Chen' at E1
+DEBUG 2026-02-28 18:52:02,930 daily_logs 678176 134557609215680 Set date '2026-02-23 18:52:02.930021' at L1
+DEBUG 2026-02-28 18:52:02,930 daily_logs 678176 134557609215680 Populated MONDAY sheet
+DEBUG 2026-02-28 18:52:02,930 daily_logs 678176 134557609215680 Set team 'Chen' at E1
+DEBUG 2026-02-28 18:52:02,930 daily_logs 678176 134557609215680 Set date '2026-02-24 18:52:02.930021' at L1
+DEBUG 2026-02-28 18:52:02,930 daily_logs 678176 134557609215680 Populated TUESDAY sheet
+DEBUG 2026-02-28 18:52:02,930 daily_logs 678176 134557609215680 Set team 'Chen' at E1
+DEBUG 2026-02-28 18:52:02,930 daily_logs 678176 134557609215680 Set date '2026-02-25 18:52:02.930021' at L1
+DEBUG 2026-02-28 18:52:02,930 daily_logs 678176 134557609215680 Populated WEDNESDAY sheet
+DEBUG 2026-02-28 18:52:02,930 daily_logs 678176 134557609215680 Set team 'Chen' at E1
+DEBUG 2026-02-28 18:52:02,930 daily_logs 678176 134557609215680 Set date '2026-02-26 18:52:02.930021' at L1
+DEBUG 2026-02-28 18:52:02,930 daily_logs 678176 134557609215680 Populated THURSDAY sheet
+DEBUG 2026-02-28 18:52:02,930 daily_logs 678176 134557609215680 Set team 'Chen' at E1
+DEBUG 2026-02-28 18:52:02,930 daily_logs 678176 134557609215680 Set date '2026-02-27 18:52:02.930021' at L1
+DEBUG 2026-02-28 18:52:02,931 daily_logs 678176 134557609215680 Populated FRIDAY sheet
+INFO 2026-02-28 18:52:02,931 daily_logs 678176 134557609215680 Template populated successfully
+DEBUG 2026-02-28 18:52:02,931 daily_logs 678176 134557609215680 Set team 'Chen' at E1
+DEBUG 2026-02-28 18:52:02,931 daily_logs 678176 134557609215680 Set date '2025-11-17 00:00:00' at L1
+DEBUG 2026-02-28 18:52:02,931 daily_logs 678176 134557609215680 Set region '8' at row 4, col 1
+DEBUG 2026-02-28 18:52:02,931 daily_logs 678176 134557609215680 Set county 'Ulster' at row 4, col 2
+DEBUG 2026-02-28 18:52:02,931 daily_logs 678176 134557609215680 Set bin '3347220' at row 4, col 3
+DEBUG 2026-02-28 18:52:02,931 daily_logs 678176 134557609215680 Set feature_carried 'LASHER ROAD' at row 4, col 4
+DEBUG 2026-02-28 18:52:02,931 daily_logs 678176 134557609215680 Set feature_crossed 'BIRCH CREEK' at row 4, col 5
+DEBUG 2026-02-28 18:52:02,931 daily_logs 678176 134557609215680 Set access 'W, EL' at row 4, col 13
+DEBUG 2026-02-28 18:52:02,931 daily_logs 678176 134557609215680 Set region '8' at row 5, col 1
+DEBUG 2026-02-28 18:52:02,931 daily_logs 678176 134557609215680 Set county 'Ulster' at row 5, col 2
+DEBUG 2026-02-28 18:52:02,931 daily_logs 678176 134557609215680 Set bin '1041240' at row 5, col 3
+DEBUG 2026-02-28 18:52:02,931 daily_logs 678176 134557609215680 Set feature_carried '214 214 86011018' at row 5, col 4
+DEBUG 2026-02-28 18:52:02,931 daily_logs 678176 134557609215680 Set feature_crossed 'STONY CLOVE CREEK' at row 5, col 5
+DEBUG 2026-02-28 18:52:02,931 daily_logs 678176 134557609215680 Set access 'W, EL' at row 5, col 13
+DEBUG 2026-02-28 18:52:02,931 daily_logs 678176 134557609215680 Populated 2 entry rows
+INFO 2026-02-28 18:52:02,931 daily_logs 678176 134557609215680 Populated MONDAY with 2 entries for 2025-11-17
+DEBUG 2026-02-28 18:52:02,932 daily_logs 678176 134557609215680 Set team 'Chen' at E1
+DEBUG 2026-02-28 18:52:02,932 daily_logs 678176 134557609215680 Set date '2025-11-18 00:00:00' at L1
+DEBUG 2026-02-28 18:52:02,932 daily_logs 678176 134557609215680 Set region '8' at row 4, col 1
+DEBUG 2026-02-28 18:52:02,932 daily_logs 678176 134557609215680 Set county 'Ulster' at row 4, col 2
+DEBUG 2026-02-28 18:52:02,932 daily_logs 678176 134557609215680 Set bin '1095450' at row 4, col 3
+DEBUG 2026-02-28 18:52:02,932 daily_logs 678176 134557609215680 Set feature_carried '209 209 86031052' at row 4, col 4
+DEBUG 2026-02-28 18:52:02,932 daily_logs 678176 134557609215680 Set feature_crossed 'FANTINE KILL' at row 4, col 5
+DEBUG 2026-02-28 18:52:02,932 daily_logs 678176 134557609215680 Set access 'W, EL' at row 4, col 13
+DEBUG 2026-02-28 18:52:02,932 daily_logs 678176 134557609215680 Set region '8' at row 5, col 1
+DEBUG 2026-02-28 18:52:02,932 daily_logs 678176 134557609215680 Set county 'Ulster' at row 5, col 2
+DEBUG 2026-02-28 18:52:02,932 daily_logs 678176 134557609215680 Set bin '2026620' at row 5, col 3
+DEBUG 2026-02-28 18:52:02,932 daily_logs 678176 134557609215680 Set feature_carried '52 52 86021106' at row 5, col 4
+DEBUG 2026-02-28 18:52:02,932 daily_logs 678176 134557609215680 Set feature_crossed 'NORTH GULLY CREEK' at row 5, col 5
+DEBUG 2026-02-28 18:52:02,932 daily_logs 678176 134557609215680 Set access 'W, EL' at row 5, col 13
+DEBUG 2026-02-28 18:52:02,932 daily_logs 678176 134557609215680 Populated 2 entry rows
+INFO 2026-02-28 18:52:02,932 daily_logs 678176 134557609215680 Populated TUESDAY with 2 entries for 2025-11-18
+INFO 2026-02-28 18:52:02,982 daily_logs 678176 134557609215680 Created daily logs for team=Chen week=2025-11-16 with 4 total entries
+INFO 2026-02-28 18:54:49,768 api 678176 134557609215680 Preview schedule requested
+ERROR 2026-02-28 18:54:49,779 input_parser 678176 134557609215680 Each row must have a BIN and scheduled date. Skipping row with empty BIN or scheduled date: '																'
+ERROR 2026-02-28 18:54:49,780 input_parser 678176 134557609215680 Each row must have a BIN and scheduled date. Skipping row with empty BIN or scheduled date: '																'
+INFO 2026-02-28 18:56:32,178 daily_logs 678176 134557609215680 Loading template from /home/p1/backend/documents/data/R8_daily_log_template.xlsx
+DEBUG 2026-02-28 18:56:32,426 daily_logs 678176 134557609215680 Set team 'Chen' at E1
+DEBUG 2026-02-28 18:56:32,426 daily_logs 678176 134557609215680 Set date '2026-02-23 18:56:32.426093' at L1
+DEBUG 2026-02-28 18:56:32,426 daily_logs 678176 134557609215680 Populated MONDAY sheet
+DEBUG 2026-02-28 18:56:32,426 daily_logs 678176 134557609215680 Set team 'Chen' at E1
+DEBUG 2026-02-28 18:56:32,426 daily_logs 678176 134557609215680 Set date '2026-02-24 18:56:32.426093' at L1
+DEBUG 2026-02-28 18:56:32,426 daily_logs 678176 134557609215680 Populated TUESDAY sheet
+DEBUG 2026-02-28 18:56:32,426 daily_logs 678176 134557609215680 Set team 'Chen' at E1
+DEBUG 2026-02-28 18:56:32,426 daily_logs 678176 134557609215680 Set date '2026-02-25 18:56:32.426093' at L1
+DEBUG 2026-02-28 18:56:32,426 daily_logs 678176 134557609215680 Populated WEDNESDAY sheet
+DEBUG 2026-02-28 18:56:32,426 daily_logs 678176 134557609215680 Set team 'Chen' at E1
+DEBUG 2026-02-28 18:56:32,426 daily_logs 678176 134557609215680 Set date '2026-02-26 18:56:32.426093' at L1
+DEBUG 2026-02-28 18:56:32,426 daily_logs 678176 134557609215680 Populated THURSDAY sheet
+DEBUG 2026-02-28 18:56:32,426 daily_logs 678176 134557609215680 Set team 'Chen' at E1
+DEBUG 2026-02-28 18:56:32,426 daily_logs 678176 134557609215680 Set date '2026-02-27 18:56:32.426093' at L1
+DEBUG 2026-02-28 18:56:32,426 daily_logs 678176 134557609215680 Populated FRIDAY sheet
+INFO 2026-02-28 18:56:32,427 daily_logs 678176 134557609215680 Template populated successfully
+DEBUG 2026-02-28 18:56:32,427 daily_logs 678176 134557609215680 Set team 'Chen' at E1
+DEBUG 2026-02-28 18:56:32,427 daily_logs 678176 134557609215680 Set date '2025-10-14 00:00:00' at L1
+DEBUG 2026-02-28 18:56:32,427 daily_logs 678176 134557609215680 Set region '8' at row 4, col 1
+DEBUG 2026-02-28 18:56:32,427 daily_logs 678176 134557609215680 Set county 'Dutchess' at row 4, col 2
+DEBUG 2026-02-28 18:56:32,427 daily_logs 678176 134557609215680 Set bin '3344070' at row 4, col 3
+DEBUG 2026-02-28 18:56:32,427 daily_logs 678176 134557609215680 Set feature_carried '44A 44A82011020' at row 4, col 4
+DEBUG 2026-02-28 18:56:32,427 daily_logs 678176 134557609215680 Set feature_crossed 'E BR WAPPINGER CK' at row 4, col 5
+DEBUG 2026-02-28 18:56:32,427 daily_logs 678176 134557609215680 Set access 'W' at row 4, col 13
+DEBUG 2026-02-28 18:56:32,427 daily_logs 678176 134557609215680 Set region '8' at row 5, col 1
+DEBUG 2026-02-28 18:56:32,427 daily_logs 678176 134557609215680 Set county 'Dutchess' at row 5, col 2
+DEBUG 2026-02-28 18:56:32,427 daily_logs 678176 134557609215680 Set bin '3344030' at row 5, col 3
+DEBUG 2026-02-28 18:56:32,427 daily_logs 678176 134557609215680 Set feature_carried 'COUNTY ROAD 86' at row 5, col 4
+DEBUG 2026-02-28 18:56:32,427 daily_logs 678176 134557609215680 Set feature_crossed 'DEER HILL CREEK' at row 5, col 5
+DEBUG 2026-02-28 18:56:32,427 daily_logs 678176 134557609215680 Set access 'SL, W' at row 5, col 13
+DEBUG 2026-02-28 18:56:32,427 daily_logs 678176 134557609215680 Populated 2 entry rows
+INFO 2026-02-28 18:56:32,427 daily_logs 678176 134557609215680 Populated TUESDAY with 2 entries for 2025-10-14
+DEBUG 2026-02-28 18:56:32,427 daily_logs 678176 134557609215680 Set team 'Chen' at E1
+DEBUG 2026-02-28 18:56:32,427 daily_logs 678176 134557609215680 Set date '2025-10-16 00:00:00' at L1
+DEBUG 2026-02-28 18:56:32,427 daily_logs 678176 134557609215680 Set region '8' at row 4, col 1
+DEBUG 2026-02-28 18:56:32,428 daily_logs 678176 134557609215680 Set county 'Dutchess' at row 4, col 2
+DEBUG 2026-02-28 18:56:32,428 daily_logs 678176 134557609215680 Set bin '3344030' at row 4, col 3
+DEBUG 2026-02-28 18:56:32,428 daily_logs 678176 134557609215680 Set feature_carried 'COUNTY ROAD 86' at row 4, col 4
+DEBUG 2026-02-28 18:56:32,428 daily_logs 678176 134557609215680 Set feature_crossed 'DEER HILL CREEK' at row 4, col 5
+DEBUG 2026-02-28 18:56:32,428 daily_logs 678176 134557609215680 Set access 'SL, W' at row 4, col 13
+DEBUG 2026-02-28 18:56:32,428 daily_logs 678176 134557609215680 Populated 1 entry rows
+INFO 2026-02-28 18:56:32,428 daily_logs 678176 134557609215680 Populated THURSDAY with 1 entries for 2025-10-16
+DEBUG 2026-02-28 18:56:32,428 daily_logs 678176 134557609215680 Set team 'Chen' at E1
+DEBUG 2026-02-28 18:56:32,428 daily_logs 678176 134557609215680 Set date '2025-10-17 00:00:00' at L1
+DEBUG 2026-02-28 18:56:32,428 daily_logs 678176 134557609215680 Set region '8' at row 4, col 1
+DEBUG 2026-02-28 18:56:32,428 daily_logs 678176 134557609215680 Set county 'Orange' at row 4, col 2
+DEBUG 2026-02-28 18:56:32,428 daily_logs 678176 134557609215680 Set bin '1052662' at row 4, col 3
+DEBUG 2026-02-28 18:56:32,428 daily_logs 678176 134557609215680 Set feature_carried '84I 84I83011298' at row 4, col 4
+DEBUG 2026-02-28 18:56:32,428 daily_logs 678176 134557609215680 Set feature_crossed 'M & NJ RR' at row 4, col 5
+DEBUG 2026-02-28 18:56:32,428 daily_logs 678176 134557609215680 Set access 'UB60, WZTC, W, RR Flagger' at row 4, col 13
+DEBUG 2026-02-28 18:56:32,428 daily_logs 678176 134557609215680 Populated 1 entry rows
+INFO 2026-02-28 18:56:32,428 daily_logs 678176 134557609215680 Populated FRIDAY with 1 entries for 2025-10-17
+INFO 2026-02-28 18:56:32,475 daily_logs 678176 134557609215680 Created daily logs for team=Chen week=2025-10-12 with 4 total entries
+INFO 2026-02-28 18:56:32,476 daily_logs 678176 134557609215680 Loading template from /home/p1/backend/documents/data/R8_daily_log_template.xlsx
+DEBUG 2026-02-28 18:56:32,727 daily_logs 678176 134557609215680 Set team 'Chen' at E1
+DEBUG 2026-02-28 18:56:32,728 daily_logs 678176 134557609215680 Set date '2026-02-23 18:56:32.727905' at L1
+DEBUG 2026-02-28 18:56:32,728 daily_logs 678176 134557609215680 Populated MONDAY sheet
+DEBUG 2026-02-28 18:56:32,728 daily_logs 678176 134557609215680 Set team 'Chen' at E1
+DEBUG 2026-02-28 18:56:32,728 daily_logs 678176 134557609215680 Set date '2026-02-24 18:56:32.727905' at L1
+DEBUG 2026-02-28 18:56:32,728 daily_logs 678176 134557609215680 Populated TUESDAY sheet
+DEBUG 2026-02-28 18:56:32,728 daily_logs 678176 134557609215680 Set team 'Chen' at E1
+DEBUG 2026-02-28 18:56:32,728 daily_logs 678176 134557609215680 Set date '2026-02-25 18:56:32.727905' at L1
+DEBUG 2026-02-28 18:56:32,728 daily_logs 678176 134557609215680 Populated WEDNESDAY sheet
+DEBUG 2026-02-28 18:56:32,728 daily_logs 678176 134557609215680 Set team 'Chen' at E1
+DEBUG 2026-02-28 18:56:32,728 daily_logs 678176 134557609215680 Set date '2026-02-26 18:56:32.727905' at L1
+DEBUG 2026-02-28 18:56:32,728 daily_logs 678176 134557609215680 Populated THURSDAY sheet
+DEBUG 2026-02-28 18:56:32,728 daily_logs 678176 134557609215680 Set team 'Chen' at E1
+DEBUG 2026-02-28 18:56:32,728 daily_logs 678176 134557609215680 Set date '2026-02-27 18:56:32.727905' at L1
+DEBUG 2026-02-28 18:56:32,728 daily_logs 678176 134557609215680 Populated FRIDAY sheet
+INFO 2026-02-28 18:56:32,728 daily_logs 678176 134557609215680 Template populated successfully
+DEBUG 2026-02-28 18:56:32,728 daily_logs 678176 134557609215680 Set team 'Chen' at E1
+DEBUG 2026-02-28 18:56:32,729 daily_logs 678176 134557609215680 Set date '2025-10-20 00:00:00' at L1
+DEBUG 2026-02-28 18:56:32,729 daily_logs 678176 134557609215680 Set region '8' at row 4, col 1
+DEBUG 2026-02-28 18:56:32,729 daily_logs 678176 134557609215680 Set county 'Orange' at row 4, col 2
+DEBUG 2026-02-28 18:56:32,729 daily_logs 678176 134557609215680 Set bin '1052662' at row 4, col 3
+DEBUG 2026-02-28 18:56:32,729 daily_logs 678176 134557609215680 Set feature_carried '84I 84I83011298' at row 4, col 4
+DEBUG 2026-02-28 18:56:32,729 daily_logs 678176 134557609215680 Set feature_crossed 'M & NJ RR' at row 4, col 5
+DEBUG 2026-02-28 18:56:32,729 daily_logs 678176 134557609215680 Set access 'UB60, WZTC, W, RR Flagger' at row 4, col 13
+DEBUG 2026-02-28 18:56:32,729 daily_logs 678176 134557609215680 Populated 1 entry rows
+INFO 2026-02-28 18:56:32,729 daily_logs 678176 134557609215680 Populated MONDAY with 1 entries for 2025-10-20
+DEBUG 2026-02-28 18:56:32,729 daily_logs 678176 134557609215680 Set team 'Chen' at E1
+DEBUG 2026-02-28 18:56:32,729 daily_logs 678176 134557609215680 Set date '2025-10-24 00:00:00' at L1
+DEBUG 2026-02-28 18:56:32,729 daily_logs 678176 134557609215680 Set region '8' at row 4, col 1
+DEBUG 2026-02-28 18:56:32,729 daily_logs 678176 134557609215680 Set county 'Dutchess' at row 4, col 2
+DEBUG 2026-02-28 18:56:32,729 daily_logs 678176 134557609215680 Set bin '1005220' at row 4, col 3
+DEBUG 2026-02-28 18:56:32,729 daily_logs 678176 134557609215680 Set feature_carried '9 9 82051087' at row 4, col 4
+DEBUG 2026-02-28 18:56:32,729 daily_logs 678176 134557609215680 Set feature_crossed 'WAPPINGER LAKE' at row 4, col 5
+DEBUG 2026-02-28 18:56:32,729 daily_logs 678176 134557609215680 Set access 'UB60, WZTC' at row 4, col 13
+DEBUG 2026-02-28 18:56:32,729 daily_logs 678176 134557609215680 Populated 1 entry rows
+INFO 2026-02-28 18:56:32,729 daily_logs 678176 134557609215680 Populated FRIDAY with 1 entries for 2025-10-24
+DEBUG 2026-02-28 18:56:32,730 daily_logs 678176 134557609215680 Set team 'Chen' at E1
+DEBUG 2026-02-28 18:56:32,730 daily_logs 678176 134557609215680 Set date '2025-10-25 00:00:00' at L1
+DEBUG 2026-02-28 18:56:32,730 daily_logs 678176 134557609215680 Set region '8' at row 4, col 1
+DEBUG 2026-02-28 18:56:32,730 daily_logs 678176 134557609215680 Set county 'Dutchess' at row 4, col 2
+DEBUG 2026-02-28 18:56:32,730 daily_logs 678176 134557609215680 Set bin '3344070' at row 4, col 3
+DEBUG 2026-02-28 18:56:32,730 daily_logs 678176 134557609215680 Set feature_carried '44A 44A82011020' at row 4, col 4
+DEBUG 2026-02-28 18:56:32,730 daily_logs 678176 134557609215680 Set feature_crossed 'E BR WAPPINGER CK' at row 4, col 5
+DEBUG 2026-02-28 18:56:32,730 daily_logs 678176 134557609215680 Set access 'W' at row 4, col 13
+DEBUG 2026-02-28 18:56:32,730 daily_logs 678176 134557609215680 Populated 1 entry rows
+INFO 2026-02-28 18:56:32,730 daily_logs 678176 134557609215680 Populated SATURDAY with 1 entries for 2025-10-25
+INFO 2026-02-28 18:56:32,778 daily_logs 678176 134557609215680 Created daily logs for team=Chen week=2025-10-19 with 3 total entries
+INFO 2026-02-28 18:56:32,779 daily_logs 678176 134557609215680 Loading template from /home/p1/backend/documents/data/R8_daily_log_template.xlsx
+DEBUG 2026-02-28 18:56:33,032 daily_logs 678176 134557609215680 Set team 'Chen' at E1
+DEBUG 2026-02-28 18:56:33,033 daily_logs 678176 134557609215680 Set date '2026-02-23 18:56:33.032828' at L1
+DEBUG 2026-02-28 18:56:33,033 daily_logs 678176 134557609215680 Populated MONDAY sheet
+DEBUG 2026-02-28 18:56:33,033 daily_logs 678176 134557609215680 Set team 'Chen' at E1
+DEBUG 2026-02-28 18:56:33,033 daily_logs 678176 134557609215680 Set date '2026-02-24 18:56:33.032828' at L1
+DEBUG 2026-02-28 18:56:33,033 daily_logs 678176 134557609215680 Populated TUESDAY sheet
+DEBUG 2026-02-28 18:56:33,033 daily_logs 678176 134557609215680 Set team 'Chen' at E1
+DEBUG 2026-02-28 18:56:33,033 daily_logs 678176 134557609215680 Set date '2026-02-25 18:56:33.032828' at L1
+DEBUG 2026-02-28 18:56:33,033 daily_logs 678176 134557609215680 Populated WEDNESDAY sheet
+DEBUG 2026-02-28 18:56:33,033 daily_logs 678176 134557609215680 Set team 'Chen' at E1
+DEBUG 2026-02-28 18:56:33,033 daily_logs 678176 134557609215680 Set date '2026-02-26 18:56:33.032828' at L1
+DEBUG 2026-02-28 18:56:33,033 daily_logs 678176 134557609215680 Populated THURSDAY sheet
+DEBUG 2026-02-28 18:56:33,034 daily_logs 678176 134557609215680 Set team 'Chen' at E1
+DEBUG 2026-02-28 18:56:33,034 daily_logs 678176 134557609215680 Set date '2026-02-27 18:56:33.032828' at L1
+DEBUG 2026-02-28 18:56:33,034 daily_logs 678176 134557609215680 Populated FRIDAY sheet
+INFO 2026-02-28 18:56:33,034 daily_logs 678176 134557609215680 Template populated successfully
+DEBUG 2026-02-28 18:56:33,034 daily_logs 678176 134557609215680 Set team 'Chen' at E1
+DEBUG 2026-02-28 18:56:33,034 daily_logs 678176 134557609215680 Set date '2025-10-27 00:00:00' at L1
+DEBUG 2026-02-28 18:56:33,034 daily_logs 678176 134557609215680 Set region '8' at row 4, col 1
+DEBUG 2026-02-28 18:56:33,035 daily_logs 678176 134557609215680 Set county 'Orange' at row 4, col 2
+DEBUG 2026-02-28 18:56:33,035 daily_logs 678176 134557609215680 Set bin '3344890' at row 4, col 3
+DEBUG 2026-02-28 18:56:33,035 daily_logs 678176 134557609215680 Set feature_carried 'OAK STREET' at row 4, col 4
+DEBUG 2026-02-28 18:56:33,035 daily_logs 678176 134557609215680 Set feature_crossed 'WALLKILL RIVER' at row 4, col 5
+DEBUG 2026-02-28 18:56:33,035 daily_logs 678176 134557609215680 Set access 'UB40, WZTC, EL, W' at row 4, col 13
+DEBUG 2026-02-28 18:56:33,035 daily_logs 678176 134557609215680 Populated 1 entry rows
+INFO 2026-02-28 18:56:33,035 daily_logs 678176 134557609215680 Populated MONDAY with 1 entries for 2025-10-27
+DEBUG 2026-02-28 18:56:33,035 daily_logs 678176 134557609215680 Set team 'Chen' at E1
+DEBUG 2026-02-28 18:56:33,035 daily_logs 678176 134557609215680 Set date '2025-10-30 00:00:00' at L1
+DEBUG 2026-02-28 18:56:33,035 daily_logs 678176 134557609215680 Set region '8' at row 4, col 1
+DEBUG 2026-02-28 18:56:33,035 daily_logs 678176 134557609215680 Set county 'Putnam' at row 4, col 2
+DEBUG 2026-02-28 18:56:33,035 daily_logs 678176 134557609215680 Set bin '1052821' at row 4, col 3
+DEBUG 2026-02-28 18:56:33,036 daily_logs 678176 134557609215680 Set feature_carried '84I 84184031079' at row 4, col 4
+DEBUG 2026-02-28 18:56:33,036 daily_logs 678176 134557609215680 Set feature_crossed 'MNRR BE LINE' at row 4, col 5
+DEBUG 2026-02-28 18:56:33,036 daily_logs 678176 134557609215680 Set access 'UB60, WZTC, EL, W' at row 4, col 13
+DEBUG 2026-02-28 18:56:33,036 daily_logs 678176 134557609215680 Populated 1 entry rows
+INFO 2026-02-28 18:56:33,036 daily_logs 678176 134557609215680 Populated THURSDAY with 1 entries for 2025-10-30
+DEBUG 2026-02-28 18:56:33,036 daily_logs 678176 134557609215680 Set team 'Chen' at E1
+DEBUG 2026-02-28 18:56:33,036 daily_logs 678176 134557609215680 Set date '2025-10-31 00:00:00' at L1
+DEBUG 2026-02-28 18:56:33,036 daily_logs 678176 134557609215680 Set region '8' at row 4, col 1
+DEBUG 2026-02-28 18:56:33,036 daily_logs 678176 134557609215680 Set county 'Putnam' at row 4, col 2
+DEBUG 2026-02-28 18:56:33,036 daily_logs 678176 134557609215680 Set bin '1052822' at row 4, col 3
+DEBUG 2026-02-28 18:56:33,036 daily_logs 678176 134557609215680 Set feature_carried '84I 84184031079' at row 4, col 4
+DEBUG 2026-02-28 18:56:33,037 daily_logs 678176 134557609215680 Set feature_crossed 'MNRR BE LINE' at row 4, col 5
+DEBUG 2026-02-28 18:56:33,037 daily_logs 678176 134557609215680 Set access 'UB60, WZTC, EL, W' at row 4, col 13
+DEBUG 2026-02-28 18:56:33,037 daily_logs 678176 134557609215680 Populated 1 entry rows
+INFO 2026-02-28 18:56:33,037 daily_logs 678176 134557609215680 Populated FRIDAY with 1 entries for 2025-10-31
+INFO 2026-02-28 18:56:33,090 daily_logs 678176 134557609215680 Created daily logs for team=Chen week=2025-10-26 with 3 total entries
+INFO 2026-02-28 18:58:01,201 api 678176 134557609215680 Preview schedule requested
+ERROR 2026-02-28 18:58:01,213 input_parser 678176 134557609215680 Each row must have a BIN and scheduled date. Skipping row with empty BIN or scheduled date: '																			'
+ERROR 2026-02-28 18:58:01,214 input_parser 678176 134557609215680 Each row must have a BIN and scheduled date. Skipping row with empty BIN or scheduled date: '																			'
+INFO 2026-02-28 18:58:25,035 api 678176 134557609215680 Preview schedule requested
+ERROR 2026-02-28 18:58:25,047 input_parser 678176 134557609215680 Each row must have a BIN and scheduled date. Skipping row with empty BIN or scheduled date: '																			'
+ERROR 2026-02-28 18:58:25,048 input_parser 678176 134557609215680 Each row must have a BIN and scheduled date. Skipping row with empty BIN or scheduled date: '																			'

@@ -8,6 +8,7 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from django.http import HttpResponse
 from documents.templates.weekly_schedule import create_schedules_as_bytes
+from documents.templates.daily_logs import create_daily_logs_as_bytes
 from src.input_parser import parse_entries_from_table, parse_tsv
 
 logger = logging.getLogger(__name__)
@@ -99,5 +100,63 @@ def generate_schedule(request):
     buf.seek(0)
     response = HttpResponse(buf.getvalue(), content_type="application/zip")
     response["Content-Disposition"] = 'attachment; filename="schedules.zip"'
+    response["Access-Control-Expose-Headers"] = "Content-Disposition"
+    return response
+
+
+@api_view(["POST"])
+def generate_daily_logs(request):
+    """Generates daily log Excel files for browser download."""
+    team_name = request.data.get("team_name", "")
+    entries_json = request.data.get("entries_json", "")
+
+    if not team_name:
+        return Response(
+            {"error": "Team name is required"}, status=status.HTTP_400_BAD_REQUEST
+        )
+
+    if not entries_json:
+        return Response(
+            {"error": "No entries provided"}, status=status.HTTP_400_BAD_REQUEST
+        )
+
+    try:
+        raw_entries = json.loads(entries_json)
+    except json.JSONDecodeError:
+        return Response(
+            {"error": "Invalid entries JSON"}, status=status.HTTP_400_BAD_REQUEST
+        )
+
+    entries = parse_entries_from_table(raw_entries)
+    if not entries:
+        return Response(
+            {"error": "No valid entries found"}, status=status.HTTP_400_BAD_REQUEST
+        )
+
+    results = create_daily_logs_as_bytes(entries, team_name)
+
+    if not results:
+        return Response(
+            {"error": "Failed to generate daily logs"},
+            status=status.HTTP_500_INTERNAL_SERVER_ERROR,
+        )
+
+    if len(results) == 1:
+        filename, content = results[0]
+        response = HttpResponse(
+            content,
+            content_type="application/vnd.ms-excel.sheet.macroEnabled.12",
+        )
+        response["Content-Disposition"] = f'attachment; filename="{filename}"'
+        response["Access-Control-Expose-Headers"] = "Content-Disposition"
+        return response
+
+    buf = io.BytesIO()
+    with zipfile.ZipFile(buf, "w", zipfile.ZIP_DEFLATED) as zf:
+        for filename, content in results:
+            zf.writestr(filename, content)
+    buf.seek(0)
+    response = HttpResponse(buf.getvalue(), content_type="application/zip")
+    response["Content-Disposition"] = 'attachment; filename="daily_logs.zip"'
     response["Access-Control-Expose-Headers"] = "Content-Disposition"
     return response

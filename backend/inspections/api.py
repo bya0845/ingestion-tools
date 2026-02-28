@@ -6,10 +6,9 @@ import logging
 from rest_framework import status
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
-from pathlib import Path
-from documents.creators import create_schedules_as_bytes
-from src.input_parser import parse_entries_from_table, parse_tsv
 from django.http import HttpResponse
+from documents.templates.weekly_schedule import create_schedules_as_bytes
+from src.input_parser import parse_entries_from_table, parse_tsv
 
 logger = logging.getLogger(__name__)
 
@@ -48,10 +47,9 @@ def preview_schedule(request):
 
 @api_view(["POST"])
 def generate_schedule(request):
-    """Generates schedule Excel files from submitted entries."""
+    """Generates schedule Excel files for browser download."""
     team_name = request.data.get("team_name", "")
     entries_json = request.data.get("entries_json", "")
-    output_dir = request.data.get("output_dir", "")
 
     if not team_name:
         return Response(
@@ -76,8 +74,7 @@ def generate_schedule(request):
             {"error": "No valid entries found"}, status=status.HTTP_400_BAD_REQUEST
         )
 
-    output_path = Path(output_dir) if output_dir else None
-    results = create_schedules_as_bytes(entries, team_name, output_dir=output_path)
+    results = create_schedules_as_bytes(entries, team_name)
 
     if not results:
         return Response(

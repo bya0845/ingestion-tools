@@ -16,7 +16,7 @@ export async function previewSchedule(rawTsv) {
   return response.json();
 }
 
-export async function generateSchedule(teamName, entries, outputDir = '') {
+export async function generateSchedule(teamName, entries, outputDir = '', saveToSystem = false) {
   const response = await fetch(`${API_BASE_URL}/inspections/schedule/`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
@@ -24,6 +24,7 @@ export async function generateSchedule(teamName, entries, outputDir = '') {
       team_name: teamName,
       entries_json: JSON.stringify(entries),
       output_dir: outputDir,
+      save_to_system: saveToSystem,
     }),
   });
   if (!response.ok) {

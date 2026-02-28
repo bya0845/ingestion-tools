@@ -73,7 +73,7 @@ export default function SchedulePage() {
 
   const handleGenerate = createGenerateHandler(
     "Schedules",
-    (trimmedDir) => generateSchedule(selectedTeam, entries, trimmedDir),
+    (trimmedDir) => generateSchedule(selectedTeam, entries, trimmedDir, !!trimmedDir),
     () => {
       if (!selectedTeam || entries.length === 0) {
         const errorMsg = !selectedTeam

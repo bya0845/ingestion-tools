@@ -12,6 +12,8 @@ https://docs.djangoproject.com/en/6.0/ref/settings/
 
 from pathlib import Path
 import environ
+import logging
+from colorama import Fore, Style
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -134,6 +136,26 @@ USE_TZ = True
 STATIC_URL = "static/"
 
 
+class ColoredFormatter(logging.Formatter):
+    """Formatter that adds colors to console output based on log level."""
+
+    LEVEL_COLORS = {
+        "DEBUG": Fore.CYAN,
+        "INFO": Fore.LIGHTWHITE_EX,
+        "WARNING": Fore.YELLOW,
+        "ERROR": Fore.RED,
+        "CRITICAL": Fore.MAGENTA,
+    }
+
+    def format(self, record):
+        levelname = record.levelname
+        if levelname in self.LEVEL_COLORS:
+            record.levelname = f"{self.LEVEL_COLORS[levelname]}{levelname}{Style.RESET_ALL}"
+        result = super().format(record)
+        record.levelname = levelname
+        return result
+
+
 LOGGING = {
     "version": 1,
     "disable_existing_loggers": False,
@@ -142,11 +164,17 @@ LOGGING = {
             "format": "{levelname} {asctime} {module} {process:d} {thread:d} {message}",
             "style": "{",
         },
+        "colored": {
+            "()": ColoredFormatter,
+            "format": "{levelname} {asctime} {module} {process:d} {thread:d} {message}",
+            "style": "{",
+            "datefmt": "%H:%M:%S",
+        },
     },
     "handlers": {
         "console": {
             "class": "logging.StreamHandler",
-            "formatter": "verbose",
+            "formatter": "colored",
         },
         "file": {
             "class": "logging.FileHandler",
@@ -159,7 +187,9 @@ LOGGING = {
         "level": "INFO",
     },
     "loggers": {
-        "teams": {"level": "DEBUG"},  #
+        "teams": {"level": "DEBUG"},
+        "documents": {"level": "DEBUG"},
+        "weekly_schedule": {"level": "DEBUG"},
         "schedules": {"level": "INFO"},
     },
 }

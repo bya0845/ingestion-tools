@@ -1,8 +1,1 @@
-INFO 2026-02-25 15:00:24,603 autoreload 595109 135861417492608 Watching for file changes with StatReloader
-INFO 2026-02-25 15:00:51,617 api 595109 135861090907840 Preview schedule requested
-INFO 2026-02-25 15:00:56,392 creators 595109 135861090907840 Initializing workbook
-INFO 2026-02-25 15:00:56,404 creators 595109 135861090907840 Workbook initialization complete
-INFO 2026-02-25 15:00:56,412 creators 595109 135861090907840 Created schedule for team=Kolesnik week=2025-10-26: 3 entries
-INFO 2026-02-25 15:01:46,367 creators 595109 135861090907840 Initializing workbook
-INFO 2026-02-25 15:01:46,378 creators 595109 135861090907840 Workbook initialization complete
-INFO 2026-02-25 15:01:46,386 creators 595109 135861090907840 Created schedule for team=Kolesnik week=2025-10-26: 3 entries
+INFO 2026-02-25 18:59:19,723 autoreload 605630 139656360853632 Watching for file changes with StatReloader

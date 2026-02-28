@@ -1,7 +1,8 @@
-from datetime import datetime, timedelta
+from datetime import datetime
 import logging
 
 from inspections.models import County
+from src.utils import get_sunday
 
 logger = logging.getLogger(__name__)
 
@@ -89,11 +90,6 @@ def wztc(access: str | None) -> str:
     if not access:
         return "N"
     return "Y" if any(t in access for t in LANE_CLOSED_TRIGGERS) else "N"
-
-
-def get_week_start(date: datetime) -> datetime:
-    """Returns the Sunday that starts the week containing date."""
-    return date - timedelta(days=(date.weekday() + 1) % 7)
 
 
 def get_county_name(county_id: int) -> str:
